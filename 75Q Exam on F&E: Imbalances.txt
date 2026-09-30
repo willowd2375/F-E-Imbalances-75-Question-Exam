@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCLEX Fluid and Electrolyte Master Quiz (Chapter 13)</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --success: #15803d;
+            --error: #b91c1c;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --border: #cbd5e1;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+        }
+
+        header p {
+            margin: 0;
+            color: #93c5fd;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .start-screen, .results-screen {
+            text-align: center;
+        }
+
+        .btn {
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .option-item {
+            background: #f1f5f9;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .option-item:hover {
+            background: #e2e8f0;
+            border-color: var(--primary-light);
+        }
+
+        .option-item input {
+            margin-top: 0.25rem;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+
+        .option-item label {
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+        }
+
+        .rationales-container {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .rationales-container h4 {
+            margin: 0 0 0.75rem 0;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .rationales-container p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rationale-correct {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .rationale-incorrect {
+            color: var(--error);
+            font-weight: 600;
+        }
+
+        .sbar-container {
+            background: #fff;
+            border: 2px solid var(--primary-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sbar-section {
+            margin-bottom: 1rem;
+        }
+
+        .sbar-section label {
+            display: block;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .sbar-section textarea, .sbar-section select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .tag-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NCLEX Fluid and Electrolyte Master Exam</h1>
+        <p>Chapter 13 Concepts & Clinical Management Review (75 Practice Questions + SBAR Case Study)</p>
+    </header>
+
+    <div class="container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="card start-screen">
+            <h2>Welcome to Your NCLEX Exam Generator</h2>
+            <p>This comprehensive test includes 75 NCLEX-style questions (Multiple Choice & Select-All-That-Apply) based strictly on Chapter 13: Concepts of Fluid and Electrolyte Balance and Imbalance, followed by a clinical case study with an SBAR report form.</p>
+            <p>Detailed rationales will be provided after submitting each question. You can review your score and retake missed questions at the end.</p>
+            <button class="btn" onclick="startQuiz()">Start Exam</button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="card hidden">
+            <div class="quiz-header">
+                <span id="question-counter">Question 1 of 76</span>
+                <span id="score-tracker">Score: 0</span>
+            </div>
+            <div id="tag-container"></div>
+            <div id="question-text" class="question-text"></div>
+            <div id="options-container" class="options-list"></div>
+            
+            <div id="rationales-container" class="rationales-container">
+                <h4>Detailed Rationales:</h4>
+                <div id="rationales-content"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button id="submit-btn" class="btn" onclick="submitAnswer()">Submit Answer</button>
+                <button id="next-btn" class="btn hidden" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+
+        <!-- SBAR Screen -->
+        <div id="sbar-screen" class="card hidden">
+            <h2>Clinical Case Study: SBAR Report</h2>
+            <p>Review the clinical scenario below and complete the SBAR report form based on Chapter 13 principles.</p>
+            <div style="background:#f8fafc; padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
+                <strong>Scenario:</strong> An 82-year-old resident in a long-term care facility is noted by assistive personnel to be increasingly lethargic and confused over the past 12 hours. Vital signs: BP 90/58 mmHg, HR 118 bpm (weak and thready), RR 24 breaths/min, Temp 37.8°C (100°F). Skin turgor over the sternum shows severe tenting. Mucous membranes are dry with thick, sticky secretions. Current medications include furosemide 40 mg daily for hypertension. Laboratory results: Serum sodium 152 mEq/L, Hematocrit 56%, Serum osmolarity 325 mOsm/L.
+            </div>
+            
+            <div class="sbar-container">
+                <div class="sbar-section">
+                    <label>Situation (S): What is the immediate clinical concern?</label>
+                    <textarea id="sbar-s" rows="2" placeholder="Describe the acute problem..."></textarea>
+                </div>
+                <div class="sbar-section">
+                    <label>Background (B): What patient data and history contribute to this state?</label>
+                    <textarea id="sbar-b" rows="2" placeholder="List medications, age, intake/output status..."></textarea>
+                </div>
+                <div class="sbar-section">
+                    <label>Assessment (A): What are the key objective findings and lab abnormalities?</label>
+                    <textarea id="sbar-a" rows="2" placeholder="Detail vital signs, lab values (Na+, Hct), and physical assessment..."></textarea>
+                </div>
+                <div class="sbar-section">
+                    <label>Recommendation (R): What nursing actions and physician notifications are required?</label>
+                    <textarea id="sbar-r" rows="2" placeholder="Specify fluid replacement type, vital sign monitoring frequency, safety precautions..."></textarea>
+                </div>
+            </div>
+            <button class="btn" onclick="finishExam()">Submit Exam & View Results</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="card results-screen hidden">
+            <h2>Exam Completed!</h2>
+            <p>Your Final Score:</p>
+            <div id="final-score" class="score-display">0 / 76</div>
+            <p id="score-message"></p>
+            <div style="margin-top: 2rem;">
+                <button class="btn" onclick="restartQuiz()">Retake Full Quiz</button>
+                <button class="btn" onclick="retakeMissed()" id="retake-missed-btn">Retake Missed Questions</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                tag: "Anatomy & Physiology / Body Fluid Distribution",
+                question: "A nurse is reviewing total body water distribution in adult clients. Which client would the nurse expect to have the highest percentage of total body water by weight?",
+                type: "mc",
+                options: [
+                    { text: "A 25-year-old lean male athlete.", isCorrect: true, rationale: "Correct: Younger adults and males generally have a higher percentage of body water (55%-60%) because muscle cells contain abundant water while fat cells contain practically no water." },
+                    { text: "A 25-year-old female with a higher percentage of body fat.", isCorrect: false, rationale: "Incorrect: Females usually have a lower percentage of body water than males of the same age due to higher body fat, which contains practically no water." },
+                    { text: "A 78-year-old male with age-related muscle mass loss.", isCorrect: false, rationale: "Incorrect: Older adults experience muscle mass loss and have lower total body water (50%-55%) compared to younger adults." },
+                    { text: "An adult client with severe obesity.", isCorrect: false, rationale: "Incorrect: Adipose tissue contains practically no water, giving obese individuals a lower total body water percentage than lean individuals of the same weight." }
+                ],
+                hint: "Consider the water content of muscle tissue versus adipose tissue."
+            },
+            {
+                id: 2,
+                tag: "Fluid Compartments / Extracellular Fluid",
+                question: "The nurse is assessing a client's fluid compartments. Which fluid is correctly categorized as part of the extracellular fluid (ECF) space? Select all that apply.",
+                type: "sata",
+                options: [
+                    { text: "Cerebrospinal fluid", isCorrect: true, rationale: "Correct: Transcellular fluids, including cerebrospinal fluid, synovial fluid, peritoneal fluid, and pleural fluid, are components of the ECF space." },
+                    { text: "Intracellular fluid", isCorrect: false, rationale: "Incorrect: Intracellular fluid (ICF) is located inside the cells, comprising about two-thirds of total body water, entirely separate from the ECF." },
+                    { text: "Plasma volume", isCorrect: true, rationale: "Correct: Plasma volume (about 3.5 to 6 L) is a major component of the extracellular fluid compartment." },
+                    { text: "Interstitial fluid", isCorrect: true, rationale: "Correct: Interstitial fluid (fluid between cells, or 'third space') is part of the ECF compartment." },
+                    { text: "Synovial fluid", isCorrect: true, rationale: "Correct: Synovial fluid is a transcellular fluid classified within the extracellular fluid space." }
+                ],
+                hint: "ECF includes interstitial spaces, blood plasma, lymph, bone/connective tissue water, and transcellular fluids."
+            },
+            {
+                id: 3,
+                tag: "Transport Processes / Filtration",
+                question: "A client with right-sided heart failure develops dependent pitting edema. Which physiological process explains the formation of this excess tissue fluid?",
+                type: "mc",
+                options: [
+                    { text: "Movement of water down a hydrostatic pressure gradient from capillaries into interstitial spaces.", isCorrect: true, rationale: "Correct: When the right ventricle fails, blood backs up, raising capillary hydrostatic pressure until it exceeds interstitial pressure, forcing fluid filtration into tissues (edema)." },
+                    { text: "Active transport of sodium ions across selective cell membranes.", isCorrect: false, rationale: "Incorrect: Edema formation in heart failure is driven by pressure differentials (hydrostatic pressure), not active transport pumps." },
+                    { text: "Osmosis of water from cells into the hyperosmotic intravascular space.", isCorrect: false, rationale: "Incorrect: Osmosis involves water movement across semipermeable membranes driven by osmolarity differences, not the primary mechanism of right-heart failure edema." },
+                    { text: "Diffusion of solute particles down a concentration gradient through impermeable membranes.", isCorrect: false, rationale: "Incorrect: Solute diffusion does not drive capillary fluid shifting and tissue edema formation." }
+                ],
+                hint: "Think about 'water-pushing' pressure generated by fluid volume against capillary walls."
+            },
+            {
+                id: 4,
+                tag: "Transport Processes / Diffusion",
+                question: "Which physiologic process transports most electrolytes and other small solute particles across cell membranes down a concentration gradient without requiring extra energy?",
+                type: "mc",
+                options: [
+                    { text: "Diffusion", isCorrect: true, rationale: "Correct: Diffusion is the random movement of solute particles from an area of higher concentration to lower concentration across a permeable membrane without energy expenditure." },
+                    { text: "Filtration", isCorrect: false, rationale: "Incorrect: Filtration is the movement of water through membranes driven by hydrostatic pressure differences." },
+                    { text: "Osmosis", isCorrect: false, rationale: "Incorrect: Osmosis is specifically the movement of water only through a selectively permeable membrane to achieve osmolarity equilibrium." },
+                    { text: "Active transport", isCorrect: false, rationale: "Incorrect: Active transport requires energy (ATP) to move particles uphill against a concentration gradient." }
+                ],
+                hint: "This process relies on random particle collisions and concentration differences."
+            },
+            {
+                id: 5,
+                tag: "Transport Processes / Facilitated Diffusion",
+                question: "A client requires insulin administration to transport glucose across cell membranes. What specific transport mechanism is operating in this process?",
+                type: "mc",
+                options: [
+                    { text: "Facilitated diffusion", isCorrect: true, rationale: "Correct: Facilitated diffusion requires a membrane-altering system (such as insulin binding to its receptor) to allow glucose to cross the cell membrane down its concentration gradient without extra energy." },
+                    { text: "Simple diffusion", isCorrect: false, rationale: "Incorrect: Glucose cannot cross cell membranes without help even down a steep gradient; it requires insulin mediation." },
+                    { text: "Osmosis", isCorrect: false, rationale: "Incorrect: Osmosis is the movement of water, not glucose molecules." },
+                    { text: "Pinocytosis", isCorrect: false, rationale: "Incorrect: Pinocytosis is a vesicular engulfment process, not facilitated diffusion." }
+                ],
+                hint: "It is a form of diffusion that requires a membrane-altering receptor system."
+            },
+            {
+                id: 6,
+                tag: "Transport Processes / Osmosis",
+                question: "A nurse is administering a hypertonic intravenous solution (e.g., 3% saline) to a client. What immediate cellular and fluid shift will occur?",
+                type: "mc",
+                options: [
+                    { text: "Water is pulled from interstitial and intracellular fluid compartments into the plasma volume.", isCorrect: true, rationale: "Correct: Hypertonic solutions have an osmolarity greater than 300 mOsm/L, creating higher osmotic pressure that draws water out of interstitial and ICF spaces into the plasma." },
+                    { text: "Water is pulled from plasma into the intracellular fluid compartment, causing cellular swelling.", isCorrect: false, rationale: "Incorrect: Hypotonic solutions pull water into cells; hypertonic solutions pull water out of cells." },
+                    { text: "Sodium particles diffuse rapidly across cell membranes until equilibrium is achieved.", isCorrect: false, rationale: "Incorrect: Osmosis involves water movement across semipermeable membranes where solute particles cannot freely cross." },
+                    { text: "Hydrostatic pressure drops instantly, stopping all capillary filtration.", isCorrect: false, rationale: "Incorrect: Hypertonic IV infusion primarily alters osmotic pressure gradients, not immediate cessation of filtration." }
+                ],
+                hint: "Water follows higher osmotic (water-pulling) pressure toward hyperosmotic fluid spaces."
+            },
+            {
+                id: 7,
+                tag: "Assessment / Laboratory Profile",
+                question: "The nurse reviews laboratory results for an adult client and notes a plasma osmolarity of 315 mOsm/L. How would the nurse interpret this finding?",
+                type: "mc",
+                options: [
+                    { text: "Hyperosmotic (hypertonic) state, often associated with dehydration.", isCorrect: true, rationale: "Correct: Normal plasma osmolarity ranges from 270 to 300 mOsm/L. A value above 300 mOsm/L indicates hyperosmolarity (hypertonicity), commonly seen in dehydration or hypernatremia." },
+                    { text: "Iso-osmotic (isotonic) state within normal physiological limits.", isCorrect: false, rationale: "Incorrect: Normal range is 270-300 mOsm/L; 315 mOsm/L is elevated." },
+                    { text: "Hypo-osmotic (hypotonic) state, indicating fluid overload.", isCorrect: false, rationale: "Incorrect: Hypo-osmotic fluids have osmolarity below 270 mOsm/L." },
+                    { text: "Normal physiological equilibrium with optimal cell hydration.", isCorrect: false, rationale: "Incorrect: This value exceeds normal plasma concentration limits." }
+                ],
+                hint: "Normal plasma osmolarity is 270 to 300 mOsm/L."
+            },
+            {
+                id: 8,
+                tag: "Regulation / Thirst Mechanism",
+                question: "Which physiological structure contains osmoreceptors that trigger the sensation of thirst when extracellular fluid osmolarity increases?",
+                type: "mc",
+                options: [
+                    { text: "Hypothalamus", isCorrect: true, rationale: "Correct: The hypothalamus contains osmoreceptors that are extremely sensitive to ECF osmolarity changes; cell shrinkage triggers thirst awareness." },
+                    { text: "Posterior pituitary gland", isCorrect: false, rationale: "Incorrect: The posterior pituitary releases ADH in response to hypothalamic signals, but does not house the osmoreceptors." },
+                    { text: "Adrenal cortex", isCorrect: false, rationale: "Incorrect: The adrenal cortex secretes aldosterone, responding to sodium levels and RAAS activation." },
+                    { text: "Right atrium", isCorrect: false, rationale: "Incorrect: The right atrium secretes atrial natriuretic peptide (ANP) in response to stretch from blood volume overload." }
+                ],
+                hint: "This master endocrine regulatory center in the brain controls thirst and body temperature."
+            },
+            {
+                id: 9,
+                tag: "Regulation / Hormones (Aldosterone)",
+                question: "A client's extracellular fluid sodium levels are low, triggering the secretion of aldosterone. Which physiologic actions will result? Select all that apply.",
+                type: "sata",
+                options: [
+                    { text: "Reabsorption of sodium from kidney nephrons back into blood", isCorrect: true, rationale: "Correct: Aldosterone acts on kidney nephrons to reabsorb sodium and water from urine back into the blood." },
+                    { text: "Reabsorption of water along with sodium into blood", isCorrect: true, rationale: "Correct: Water follows sodium reabsorption, increasing blood volume and osmolarity." },
+                    { text: "Enhanced excretion of potassium in the urine", isCorrect: true, rationale: "Correct: Aldosterone promotes kidney potassium excretion while conserving sodium." },
+                    { text: "Inhibition of renin-angiotensin-aldosterone system", isCorrect: false, rationale: "Incorrect: Aldosterone is the end product of RAAS activation; low sodium and perfusion stimulate, rather than inhibit, this pathway." },
+                    { text: "Excretion of sodium and water into urine", isCorrect: false, rationale: "Incorrect: Aldosterone prevents both sodium and water loss; natriuretic peptides promote excretion." }
+                ],
+                hint: "Aldosterone is nicknamed the 'water-and-sodium-saving hormone'."
+            },
+            {
+                id: 10,
+                tag: "Regulation / Hormones (ADH)",
+                question: "A client exhibits increased blood osmolarity and plasma sodium concentration. The nurse anticipates the immediate release of which hormone from the posterior pituitary?",
+                type: "mc",
+                options: [
+                    { text: "Antidiuretic hormone (ADH)", isCorrect: true, rationale: "Correct: Increased blood osmolarity shrinks hypothalamic osmoreceptors, stimulating posterior pituitary release of ADH to retain water and dilute ECF." },
+                    { text: "Atrial natriuretic peptide (ANP)", isCorrect: false, rationale: "Incorrect: ANP is released by atrial stretch from fluid volume overload, not increased osmolarity." },
+                    { text: "Aldosterone", isCorrect: false, rationale: "Incorrect: Aldosterone is secreted by the adrenal cortex in response to low ECF sodium or RAAS activation." },
+                    { text: "Renin", isCorrect: false, rationale: "Incorrect: Renin is an enzyme secreted by kidney tubular cells, not the posterior pituitary." }
+                ],
+                hint: "This hormone makes kidney nephrons more permeable to water."
+            },
+            {
+                id: 11,
+                tag: "Regulation / Natriuretic Peptides",
+                question: "A client is admitted with hypervolemia and elevated mean arterial pressure causing heart tissue stretch. Which hormone will be secreted by the heart to promote fluid excretion?",
+                type: "mc",
+                options: [
+                    { text: "Brain natriuretic peptide (BNP) and Atrial natriuretic peptide (ANP)", isCorrect: true, rationale: "Correct: Natriuretic peptides are secreted by heart atria (ANP) and ventricles (BNP) in response to tissue stretch from increased blood volume, inhibiting sodium reabsorption and increasing urine output." },
+                    { text: "Aldosterone", isCorrect: false, rationale: "Incorrect: Aldosterone retains sodium and water; NPs have the opposite effect." },
+                    { text: "Antidiuretic hormone (ADH)", isCorrect: false, rationale: "Incorrect: ADH retains water; hypervolemia inhibits ADH secretion." },
+                    { text: "Renin", isCorrect: false, rationale: "Incorrect: Renin is secreted during decreased perfusion and low blood pressure to raise blood pressure." }
+                ],
+                hint: "These cardiac hormones produce effects opposite to aldosterone."
+            },
+            {
+                id: 12,
+                tag: "Regulation / RAAS",
+                question: "What is the primary triggering event that stimulates the kidneys to secrete renin into the bloodstream?",
+                type: "mc",
+                options: [
+                    { text: "Decreased tissue perfusion signaled by low blood pressure, volume, sodium, or oxygen", isCorrect: true, rationale: "Correct: Renin is secreted when specialized kidney tubular cells sense low blood pressure, volume, sodium, or oxygen, activating the RAAS cascade to restore perfusion." },
+                    { text: "Elevated atrial pressure stretching heart ventricular tissue", isCorrect: false, rationale: "Incorrect: Atrial stretch triggers natriuretic peptides, not renin." },
+                    { text: "Decreased blood osmolarity below 270 mOsm/L", isCorrect: false, rationale: "Incorrect: Low osmolarity inhibits ADH and triggers water excretion, but renin responds primarily to perfusion threats." },
+                    { text: "Increased glomerular filtration rate and excessive urine output", isCorrect: false, rationale: "Incorrect: Decreased glomerular filtration and reduced urine output are results of RAAS activation, not triggers." }
+                ],
+                hint: "Renin acts as a alarm system when tissue perfusion and blood pressure are at risk."
+            },
+            {
+                id: 13,
+                tag: "Pharmacology / RAAS Interrupters",
+                question: "A client with hypertension is prescribed an ACE inhibitor (ACEI). How does this medication therapeutically affect the renin-angiotensin-aldosterone system?",
+                type: "mc",
+                options: [
+                    { text: "Reduces angiotensin-converting enzyme production, lowering angiotensin II, vasoconstriction, and aldosterone.", isCorrect: true, rationale: "Correct: ACE inhibitors disrupt RAAS by reducing ACE, resulting in less angiotensin II, decreased vasoconstriction, reduced aldosterone, and increased excretion of water and sodium." },
+                    { text: "Directly blocks aldosterone receptors in the renal distal tubules.", isCorrect: false, rationale: "Incorrect: Potassium-sparing diuretics or mineralocorticoid receptor antagonists block aldosterone receptors, whereas ACEIs inhibit the converting enzyme." },
+                    { text: "Stimulates the release of atrial natriuretic peptide from the heart.", isCorrect: false, rationale: "Incorrect: ACEIs do not stimulate NP release." },
+                    { text: "Increases renin secretion to enhance sodium retention.", isCorrect: false, rationale: "Incorrect: ACEIs block downstream conversion of angiotensin I to II, decreasing aldosterone." }
+                ],
+                hint: "ACE inhibitors prevent the conversion of angiotensin I to angiotensin II."
+            },
+            {
+                id: 14,
+                tag: "Electrolytes / Sodium",
+                question: "The nurse is reviewing the critical roles of sodium $(Na^{+})$ in the human body. Which functions are directly dependent on ECF sodium levels? Select all that apply.",
+                type: "sata",
+                options: [
+                    { text: "Maintaining extracellular fluid osmolarity and volume", isCorrect: true, rationale: "Correct: Sodium is the major ECF cation determining whether water is retained, excreted, or shifted between compartments." },
+                    { text: "Skeletal muscle contraction", isCorrect: true, rationale: "Correct: Sodium influx across excitable membranes is required for depolarization and muscle contraction." },
+                    { text: "Cardiac muscle contraction", isCorrect: true, rationale: "Correct: Membrane depolarization for cardiac rhythm depends heavily on available extracellular sodium." },
+                    { text: "Nerve impulse transmission", isCorrect: true, rationale: "Correct: Action potential generation and nerve transmission rely on sodium ion movement." },
+                    { text: "Active transport of vitamin D absorption in bones", isCorrect: false, rationale: "Incorrect: Vitamin D absorption and bone matrix regulation are primarily regulated by parathyroid hormone (PTH) and calcium." }
+                ],
+                hint: "Sodium is the major ECF cation governing osmolarity and membrane excitability."
+            },
+            {
+                id: 15,
+                tag: "Electrolytes / Potassium",
+                question: "What is the primary intracellular mechanism responsible for maintaining high intracellular potassium $(K^{+})$ and low extracellular potassium levels?",
+                type: "mc",
+                options: [
+                    { text: "The sodium-potassium pump within cell membranes", isCorrect: true, rationale: "Correct: The sodium-potassium pump actively transports extra sodium out of cells and pumps potassium back into cells, maintaining high ICF potassium and low ECF potassium." },
+                    { text: "Passive diffusion down a steep concentration gradient", isCorrect: false, rationale: "Incorrect: Passive diffusion would cause potassium to exit cells where concentration is extremely high." },
+                    { text: "Parathyroid hormone-mediated bone resorption", isCorrect: false, rationale: "Incorrect: Parathyroid hormone regulates calcium, not potassium." },
+                    { text: "Aldosterone-mediated renal tubular reabsorption", isCorrect: false, rationale: "Incorrect: Renal regulation controls overall body potassium balance, but cellular gradients are maintained by membrane pumps." }
+                ],
+                hint: "This active cellular pump exchanges intracellular sodium for extracellular potassium."
+            },
+            {
+                id: 16,
+                tag: "Electrolytes / Calcium",
+                question: "A client asks the nurse about the physiological roles of calcium $(Ca^{2+})$ in the body. Which functions should the nurse include in the explanation? Select all that apply.",
+                type: "sata",
+                options: [
+                    { text: "Maintaining bone strength and density", isCorrect: true, rationale: "Correct: Most body calcium is stored in bone matrix, providing structural strength and density." },
+                    { text: "Activating intracellular enzymes", isCorrect: true, rationale: "Correct: Ionized calcium acts as a cofactor activating numerous metabolic enzymes." },
+                    { text: "Facilitating skeletal and cardiac muscle contraction", isCorrect: true, rationale: "Correct: Calcium regulates membrane depolarization and muscle fiber contraction." },
+                    { text: "Enhancing blood clotting", isCorrect: true, rationale: "Correct: Calcium is a vital coagulation factor in the clotting cascade." },
+                    { text: "Serving as the primary intracellular cation for water balance", isCorrect: false, rationale: "Incorrect: Potassium is the major ICF cation, whereas sodium regulates ECF water balance." }
+                ],
+                hint: "Think about bones, blood clotting, muscle contraction, and enzyme activation."
+            },
+            {
+                id: 17,
+                tag: "Electrolytes / Magnesium",
+                question: "An adult client is evaluated for cardiac dysrhythmias and muscle weakness. The nurse knows that intracellular magnesium $(Mg^{2+})$ is particularly essential for the health and maintenance of which organ?",
+                type: "mc",
+                options: [
+                    { text: "Cardiac muscle", isCorrect: true, rationale: "Correct: Adequate intracellular magnesium is essential for cardiac muscle health, energy stores, and proper electrolyte balance with potassium and calcium." },
+                    { text: "Skeletal bone matrix", isCorrect: false, rationale: "Incorrect: While stored in bones, magnesium's critical functional role in excitable tissue is cardiac muscle health." },
+                    { text: "Thyroid gland", isCorrect: false, rationale: "Incorrect: Thyroid function is primarily regulated by thyroid hormones and iodine." },
+                    { text: "Gastric mucosa", isCorrect: false, rationale: "Incorrect: Gastric mucosa relies on local barrier mechanisms rather than intracellular magnesium." }
+                ],
+                hint: "Magnesium levels heavily influence cardiac rhythm and stability."
+            },
+            {
+                id: 18,
+                tag: "Dehydration / Pathophysiology",
+                question: "What is the most common type of fluid loss problem encountered in clinical practice?",
+                type: "mc",
+                options: [
+                    { text: "Isotonic dehydration (fluid lost from ECF plasma and interstitial spaces equally)", isCorrect: true, rationale: "Correct: Isotonic dehydration occurs when water and electrolyte losses are equal, pulling fluid solely from the ECF space without shifting ICF volume." },
+                    { text: "Hypotonic dehydration (intracellular fluid loss exceeding ECF loss)", isCorrect: false, rationale: "Incorrect: Hypotonic fluid loss involves greater electrolyte loss than water." },
+                    { text: "Vascular dehydration due to fluid shifts from plasma to interstitial spaces", isCorrect: false, rationale: "Incorrect: Vascular dehydration refers to shifts without total body water loss, but isotonic fluid loss is the most common overall type." },
+                    { text: "Hypertonic dehydration with intracellular swelling", isCorrect: false, rationale: "Incorrect: Hypertonic dehydration causes cellular shrinkage, not swelling." }
+                ],
+                hint: "This type involves proportional loss of water and electrolytes from the ECF."
+            },
+            {
+                id: 19,
+                tag: "Older Adult Health / Fluid Balance",
+                question: "When assessing an 80-year-old client for hydration status, which age-related physiological change should the nurse consider?",
+                type: "mc",
+                options: [
+                    { text: "Reduced thirst reflex and decreased kidney concentrating capacity", isCorrect: true, rationale: "Correct: Older adults experience reduced thirst reflex, adrenal atrophy, and decreased kidney concentrating capacity, significantly increasing dehydration risk." },
+                    { text: "Increased skin elasticity and elevated dermal turgor", isCorrect: false, rationale: "Incorrect: Older adults experience loss of skin elasticity and decreased turgor, making skin an unreliable indicator." },
+                    { text: "Increased total body water percentage due to higher fat stores", isCorrect: false, rationale: "Incorrect: Total body water decreases with age, and fat stores increase." },
+                    { text: "Enhanced glomerular filtration rate and concentrated urine output", isCorrect: false, rationale: "Incorrect: Glomerular filtration and concentrating ability both decrease with age." }
+                ],
+                hint: "Aging affects neurological thirst perception and renal concentrating ability."
+            },
+            {
+                id: 20,
+                tag: "Assessment / Daily Weight & Fluid Loss",
+                question: "A client is weighed daily for fluid balance monitoring. The client's weight has decreased by 2.2 lb (1 kg) in 24 hours. What volume of fluid loss does this weight change represent?",
+                type: "mc",
+                options: [
+                    { text: "1000 mL (1 L)", isCorrect: true, rationale: "Correct: Because 1 L of water weighs 2.2 lb (1 kg), a 2.2 lb weight loss directly corresponds to a fluid volume loss of approximately 1000 mL." },
+                    { text: "500 mL", isCorrect: false, rationale: "Incorrect: 500 mL corresponds to a 1 lb weight change." },
+                    { text: "2000 mL (2 L)", isCorrect: false, rationale: "Incorrect: 2000 mL would correspond to a 4.4 lb weight loss." },
+                    { text: "250 mL", isCorrect: false, rationale: "Incorrect: 250 g (0.5 lb) is the maximum normal daily metabolic weight fluctuation." }
+                ],
+                hint: "Remember that 1 liter of water weighs 2.2 pounds (1 kilogram)."
+            },
+            {
+                id: 21,
+                tag: "Assessment / Physical Findings in Dehydration",
+                question: "The nurse performs a physical assessment on a client with severe dehydration. Which cardiovascular and hemodynamic findings should the nurse expect? Select all that apply.",
+                type: "sata",
+                options: [
+                    { text: "Increased heart rate (tachycardia)", isCorrect: true, rationale: "Correct: Heart rate increases as a compensatory mechanism to maintain blood pressure with reduced blood volume." },
+                    { text: "Orthostatic hypotension", isCorrect: true, rationale: "Correct: Blood pressure drops significantly when moving from lying to standing due to decreased circulating volume and impaired perfusion." },
+                    { text: "Flat neck and hand veins even when supine", isCorrect: true, rationale: "Correct: Reduced ECF volume causes neck and hand veins to appear flat rather than distended." },
+                    { text: "Weak, thready peripheral pulses", isCorrect: true, rationale: "Correct: Decreased volume produces weak, easily blocked peripheral pulses." },
+                    { text: "Bounding, full peripheral pulses", isCorrect: false, rationale: "Incorrect: Bounding pulses indicate fluid overload/hypervolemia, not dehydration." }
+                ],
+                hint: "Dehydration causes hypovolemia, leading to low blood pressure, flat veins, and rapid pulse."
+            },
+            {
+                id: 22,
+                tag: "Older Adult Health / Assessment",
+                question: "An 84-year-old client is admitted with dehydration. When assessing skin turgor, what is the most reliable technique for this age group?",
+                type: "mc",
+                options: [
+                    { text: "Gently pinching and releasing the skin over the sternum", isCorrect: true, rationale: "Correct: Assessing skin turgor over the sternum is reliable in older adults because aging causes hand and arm skin to lose elasticity and tent regardless of hydration status." },
+                    { text: "Pinching the skin on the back of the hand", isCorrect: false, rationale: "Incorrect: Hand skin tents due to normal aging elastosis even when well hydrated." },
+                    { text: "Observing for moist oral mucous membranes and absence of tongue furrows", isCorrect: false, rationale: "Incorrect: While mucous membranes are assessed, this is not the specific skin turgor pinching technique." },
+                    { text: "Checking capillary refill time on the nail beds", isCorrect: false, rationale: "Incorrect: Capillary refill assesses peripheral perfusion, not skin turgor." }
+                ],
+                hint: "Older adults' hands naturally tent due to loss of skin elasticity; choose a central torso site."
+            },
+            {
+                id: 23,
+                tag: "Assessment / Laboratory Findings in Dehydration",
+                question: "The nurse reviews laboratory reports for a client with acute dehydration due to excessive vomiting. Which laboratory findings should the nurse anticipate? Select all that apply.",
+                type: "sata",
+                options: [
+                    { text: "Elevated hematocrit (hemoconcentration)", isCorrect: true, rationale: "Correct: Water loss concentrates blood components, raising hematocrit, hemoglobin, BUN, and serum osmolarity." },
+                    { text: "Elevated blood urea nitrogen (BUN)", isCorrect: true, rationale: "Correct: Hemoconcentration from fluid deficit causes elevated BUN levels." },
+                    { text: "Elevated serum osmolarity above 300 mOsm/L", isCorrect: true, rationale: "Correct: Loss of water without proportional solute loss raises serum osmolarity." },
+                    { text: "Decreased hemoglobin and hematocrit (hemodilution)", isCorrect: false, rationale: "Incorrect: Hemodilution occurs in fluid overload, whereas dehydration causes hemoconcentration." },
+                    { text: "Decreased serum sodium levels", isCorrect: false, rationale: "Incorrect: Sodium is typically elevated or normal in dehydration due to water deficit." }
+                ],
+                hint: "Dehydration causes hemoconcentration of lab values because water volume is reduced."
+            },
+            {
+                id: 24,
+                tag: "Interventions / Fluid Replacement",
+                question: "A client with moderate dehydration is alert and able to swallow. What is the priority nursing intervention for fluid replacement?",
+                type: "mc",
+                options: [
+                    { text: "Encouraging oral fluid replacement with preferred fluids on a scheduled hourly basis", isCorrect: true, rationale: "Correct: Mild to moderate dehydration in alert clients is best corrected with oral fluids divided evenly across 24 hours to meet hydration goals." },
+                    { text: "Initiating rapid infusion of 5% dextrose in water (D5W) via IV", isCorrect: false, rationale: "Incorrect: D5W metabolizes quickly and is not a primary resuscitation fluid for moderate dehydration without specific indications." },
+                    { text: "Withholding all oral fluids to prevent potential aspiration", isCorrect: false, rationale: "Incorrect: Withholding fluids worsens dehydration." },
+                    { text: "Administering colloid resuscitation solutions", isCorrect: false, rationale: "Incorrect: Colloids are second-line agents; oral fluids are preferred for alert clients with moderate dehydration." }
+                ],
+                hint: "Oral replacement is preferred whenever the client is alert and able to tolerate oral intake."
+            },
+            {
+                id: 25,
+                tag: "Fluid Overload / Pathophysiology",
+                question: "What is the most common type of fluid overload encountered in clinical settings?",
+                type: "mc",
+                options: [
+                    { text: "Hypervolemia (excess fluid in the extracellular fluid space)", isCorrect: true, rationale: "Correct: Hypervolemia results from excessive fluid intake or inadequate excretion, expanding the ECF vascular and interstitial spaces." },
+                    { text: "Intracellular fluid overload resulting from hypotonic overhydration", isCorrect: false, rationale: "Incorrect: While intracellular swelling occurs, hypervolemia (ECF excess) is the most common clinical form." },
+                    { text: "Vascular dehydration with interstitial fluid shifting", isCorrect: false, rationale: "Incorrect: This describes a fluid deficit mechanism, not overload." },
+                    { text: "Isotonic dehydration", isCorrect: false, rationale: "Incorrect: Isotonic dehydration is a fluid deficit state." }
+                ],
+                hint: "This condition involves excess fluid volume within the vascular and interstitial compartments."
+            },
+            {
+                id: 26,
+                tag: "Fluid Overload / Assessment",
+                question: "The nurse assesses a client with acute fluid overload. Which clinical manifestations should the nurse expect to find? Select all that apply.",
+                type: "sata",
+                options: [
+                    { text: "Bounding pulse quality", isCorrect: true, rationale: "Correct: Excess vascular volume produces a full, bounding pulse that is difficult to block." },
+                    { text: "Distended neck and hand veins", isCorrect: true, rationale: "Correct: Increased intravascular pressure causes jugular and hand vein engorgement even in upright positions." },
+                    { text: "Moist crackles in lung fields", isCorrect: true, rationale: "Correct: Fluid overload backs up into pulmonary circulation, causing pulmonary congestion and moist crackles." },
+                    { text: "Pitting edema in dependent areas", isCorrect: true, rationale: "Correct: Excess interstitial fluid accumulates in dependent lower extremities." },
+                    { text: "Flat neck veins and hypotension", isCorrect: false, rationale: "Incorrect: Flat veins and hypotension characterize dehydration, not fluid overload." }
+                ],
+                hint: "Think about high pressure and engorged vessels in fluid volume excess."
+            },
+            {
+                id: 27,
+                tag: "Fluid Overload / Critical Rescue",
+                question: "A client receiving IV fluid therapy for dehydration suddenly develops a bounding pulse, increased neck vein distention in the upright position, and moist crackles throughout lung fields. What is the nurse's priority action?",
+                type: "mc",
+                options: [
+                    { text: "Notify the primary health care provider immediately regarding signs of pulmonary edema/fluid overload.", isCorrect: true, rationale: "Correct: Pulmonary edema can develop rapidly and lead to death; notifying the provider and halting/slowing fluids is critical." },
+                    { text: "Increase the IV infusion rate to maintain vein patency.", isCorrect: false, rationale: "Incorrect: Increasing the rate would worsen hypervolemia and precipitate acute heart failure." },
+                    { text: "Place the client in a flat supine position to improve venous return.", isCorrect: false, rationale: "Incorrect: A flat position increases venous return and worsens pulmonary congestion; the client should be upright." },
+                    { text: "Administer a concentrated potassium bolus.", isCorrect: false, rationale: "Incorrect: Potassium boluses are contraindicated and lethal; treatment requires diuretics and fluid restriction." }
+                ],
+                hint: "These are hallmark danger signs of impending pulmonary edema."
+            },
+            {
+                id: 28,
+                tag: "Hyponatremia / Pathophysiology",
+                question: "A client's serum sodium level is 128 mEq/L. The nurse understands that the pathophysiological problems caused by hyponatremia stem from which mechanisms?",
+                type: "mc",
+                options: [
+                    { text: "Reduced excitable membrane depolarization and cellular swelling", isCorrect: true, rationale: "Correct: Low ECF sodium slows membrane depolarization (making excitable tissues less responsive) and creates an osmotic gradient drawing water into cells, causing cellular swelling." },
+                    { text: "Rapid cellular dehydration and increased membrane excitability", isCorrect: false, rationale: "Incorrect: Rapid dehydration and irritability occur in hypernatremia." },
+                    { text: "Precipitation of calcium crystals within bone matrix", isCorrect: false, rationale: "Incorrect: Calcium and phosphorus regulate bone mineralization." },
+                    { text: "Immediate destruction of intracellular potassium stores", isCorrect: false, rationale: "Incorrect: Hyponatremia alters sodium gradients, not direct potassium destruction." }
+                ],
+                hint: "Low sodium outside the cell slows depolarization and causes water to enter cells (swelling)."
+            },
+            {
+                id: 29,
+                tag: "Hyponatremia / Assessment",
+                question: "An older adult client is admitted with acute confusion, lethargy, muscle weakness, and a serum sodium level of 122 mEq/L. Which nursing assessment is the immediate safety priority?",
+                type: "mc",
+                options: [
+                    { text: "Assess respiratory effectiveness and breathing strength.", isCorrect: true, rationale: "Correct: Severe hyponatremia causes generalized muscle weakness; assessing respiratory muscle strength and effectiveness is the top priority to prevent respiratory failure." },
+                    { text: "Measure deep tendon reflex responses in bilateral lower extremities.", isCorrect: false, rationale: "Incorrect: While reflexes diminish, checking airway and breathing takes immediate priority." },
+                    { text: "Auscultate bowel sounds in all four abdominal quadrants.", isCorrect: false, rationale: "Incorrect: Bowel motility changes occur, but respiratory status is the life-threatening priority." },
+                    { text: "Perform skin turgor assessment over the hand.", isCorrect: false, rationale: "Incorrect: Skin turgor does not address immediate airway/breathing safety." }
+                ],
+                hint: "Whenever neuromuscular weakness is present, ventilation and respiratory muscle strength are paramount."
+            },
+            {
+                id: 30,
+                tag: "Hypernatremia / Pathophysiology",
+                question: "A client has a serum sodium level of 150 mEq/L. What physiological effect does hypernatremia have on excitable tissues and cellular water balance?",
+                type: "mc",
+                options: [
+                    { text: "Increased membrane excitability (irritability) and cellular dehydration/shrinkage", isCorrect: true, rationale: "Correct: High ECF sodium provides a larger gradient for rapid depolarization, making excitable tissues hyperactive (irritability), while water moves out of cells, causing cellular dehydration and shrinkage." },
+                    { text: "Slowed membrane depolarization and massive cellular swelling", isCorrect: false, rationale: "Incorrect: This describes hyponatremia." },
+                    { text: "Immediate paralysis and cellular lysis", isCorrect: false, rationale: "Incorrect: Lysis occurs with severe intracellular swelling in hypotonic states." },
+                    { text: "Inhibition of all neurological and cardiac electrical activity", isCorrect: false, rationale: "Incorrect: Early hypernatremia causes hyper-excitability before tissue fatigue sets in." }
+                ],
+                hint: "High sodium outside cells draws water out (shrinkage) and increases nerve/muscle excitability."
+            },
+            {
+                id: 31,
+                tag: "Hypokalemia / Pathophysiology",
+                question: "A client's serum potassium level is 2.8 mEq/L. The nurse recognizes that hypokalemia causes which effect on cell membrane excitability?",
+                type: "mc",
+                options: [
+                    { text: "Reduces cell membrane excitability, making nerve and muscle cells less responsive to normal stimuli.", isCorrect: true, rationale: "Correct: Low serum potassium levels reduce cell membrane excitability, rendering excitable tissues less responsive and causing generalized weakness and flaccid paralysis." },
+                    { text: "Increases cell membrane irritability, causing spontaneous tetany and seizures.", isCorrect: false, rationale: "Incorrect: Tetany and over-excitability are associated with hypocalcemia and hypomagnesemia, whereas hypokalemia decreases responsiveness." },
+                    { text: "Accelerates cardiac depolarization, leading immediately to ventricular fibrillation.", isCorrect: false, rationale: "Incorrect: Hyperkalemia triggers rapid ventricular fibrillation and tall T waves; hypokalemia flattens T waves and causes U waves." },
+                    { text: "Maintains resting membrane potential at normal baseline levels.", isCorrect: false, rationale: "Incorrect: Potassium is critical for resting membrane potential; deficiency alters electrical conduction." }
+                ],
+                hint: "Low potassium makes nerve and muscle cell membranes sluggish and less excitable."
+            },
+            {
+                id: 32,
+                tag: "Hypokalemia / Assessment",
+                question: "The nurse is monitoring a client with severe hypokalemia. Which electrocardiogram (ECG) changes should the nurse anticipate observing?",
+                type: "mc",
+                options: [
+                    { text: "ST-segment depression, flat or inverted T waves, and prominent U waves", isCorrect: true, rationale: "Correct: Hypokalemia characteristically produces ECG changes including ST depression, shallow or inverted T waves, and prominent U waves." },
+                    { text: "Tall, peaked T waves and widened QRS complexes", isCorrect: false, rationale: "Incorrect: Tall, peaked T waves and widened QRS complexes characterize hyperkalemia." },
+                    { text: "Prolonged QT interval and palmar flexion spasms", isCorrect: false, rationale: "Incorrect: Prolonged QT intervals occur in hypocalcemia." },
+                    { text: "Complete heart block with asystole", isCorrect: false, rationale: "Incorrect: Asystole is associated with severe hyperkalemia or hypermagnesemia." }
+                ],
+                hint: "Look for prominent U waves and shallow T waves on the cardiac monitor."
+            },
+            {
+                id: 33,
+                tag: "Hypokalemia / Critical Safety",
+                question: "A client with hypokalemia is prescribed intravenous potassium chloride. Which safety rule is mandatory for IV potassium administration?",
+                type: "mc",
+                options: [
+                    { text: "Potassium must be diluted and administered slowly (5 to 10 mEq/hr); never give IV push.", isCorrect: true, rationale: "Correct: In accordance with National Patient Safety Goals, concentrated potassium must be diluted by pharmacy and infused slowly (5-10 mEq/hr). Never give IV push or undiluted, as it causes cardiac arrest." },
+                    { text: "Potassium may be administered undiluted via IV push if heart rhythm is monitored.", isCorrect: false, rationale: "Incorrect: IV push potassium is fatal and strictly prohibited." },
+                    { text: "Potassium chloride can be given via intramuscular injection if veins are fragile.", isCorrect: false, rationale: "Incorrect: Potassium is a severe tissue irritant and must never be given IM or subcutaneously." },
+                    { text: "The recommended infusion rate for peripheral lines is 50 mEq/hr.", isCorrect: false, rationale: "Incorrect: 50 mEq/hr is dangerously fast and would cause cardiac arrest." }
+                ],
+                hint: "Remember: Dilute it, infuse slowly, never IV push."
+            },
+            {
+                id: 34,
+                tag: "Hyperkalemia / Pathophysiology",
+                question: "A client's serum potassium level is 6.2 mEq/L. Which body system is most severely and immediately threatened by hyperkalemia?",
+                type: "mc",
+                options: [
+                    { text: "Cardiovascular system (cardiac conduction and rhythm)", isCorrect: true, rationale: "Correct: Hyperkalemia increases cell excitability in cardiac muscle, interfering with electrical conduction and leading to life-threatening heart block, asystole, and ventricular fibrillation." },
+                    { text: "Integumentary system (skin turgor and elasticity)", isCorrect: false, rationale: "Incorrect: Skin integrity is affected by fluid balance and edema, not potassium toxicity." },
+                    { text: "Gastrointestinal absorptive surface area", isCorrect: false, rationale: "Incorrect: GI motility increases (diarrhea), but cardiac arrest is the fatal threat." },
+                    { text: "Renal glomerular filtration rate", isCorrect: false, rationale: "Incorrect: Kidney failure often causes hyperkalemia, but the heart is the immediate fatal target." }
+                ],
+                hint: "The heart is extremely sensitive to potassium levels."
+            },
+            {
+                id: 35,
+                tag: "Hyperkalemia / Assessment & ECG",
+                question: "The nurse reviews an ECG tracing for a client with a serum potassium level of 7.0 mEq/L. Which classic ECG abnormality should the nurse expect to see?",
+                type: "mc",
+                options: [
+                    { text: "Tall, peaked T waves", isCorrect: true, rationale: "Correct: Tall, peaked T waves are a classic hallmark ECG sign of hyperkalemia, along with prolonged PR intervals and widened QRS complexes." },
+                    { text: "Prominent U waves and ST depression", isCorrect: false, rationale: "Incorrect: Prominent U waves indicate hypokalemia." },
+                    { text: "Shortened QT interval", isCorrect: false, rationale: "Incorrect: Shortened QT intervals occur in hypercalcemia." },
+                    { text: "Normal sinus rhythm with flattened T waves", isCorrect: false, rationale: "Incorrect: Hyperkalemia produces tall, peaked T waves, not flattened T waves." }
+                ],
+                hint: "Think of tall, sharp, 'tent-like' T waves."
+            },
+            {
+                id: 36,
+                tag: "Hypocalcemia / Assessment",
+                question: "A client who underwent a total thyroidectomy 24 hours ago reports numbness and tingling around the mouth and fingers. The nurse tests for Trousseau sign. How is a positive Trousseau sign elicited and demonstrated?",
+                type: "mc",
+                options: [
+                    { text: "Inflating a blood pressure cuff above systolic pressure for 1-4 minutes, resulting in palmar flexion spasm.", isCorrect: true, rationale: "Correct: Trousseau sign is elicited by inflating a BP cuff above systolic pressure for 1-4 minutes; a positive result shows hand and finger spasm in palmar flexion." },
+                    { text: "Tapping the facial nerve below the ear, resulting in cheek twitching.", isCorrect: false, rationale: "Incorrect: This describes the Chvostek sign." },
+                    { text: "Auscultating breath sounds for wheezing during deep inspiration.", isCorrect: false, rationale: "Incorrect: This assesses respiratory status." },
+                    { text: "Checking deep tendon reflexes for hyporeflexia.", isCorrect: false, rationale: "Incorrect: Hypocalcemia causes hyperactive reflexes, not hyporeflexia." }
+                ],
+                hint: "It involves a blood pressure cuff on the arm causing carpal spasm."
+            },
+            {
+                id: 37,
+                tag: "Hypercalcemia / Pathophysiology & Assessment",
+                question: "A client has a total serum calcium level of 11.5 mg/dL. Which clinical manifestations should the nurse anticipate? Select all that apply.",
+                type: "sata",
+                options: [
+                    { text: "Severe muscle weakness and decreased deep tendon reflexes", isCorrect: true, rationale: "Correct: Hypercalcemia depresses excitable tissues, causing muscle weakness and diminished deep tendon reflexes." },
+                    { text: "Constipation and decreased peristalsis", isCorrect: true, rationale: "Correct: High calcium depresses intestinal smooth muscle, leading to constipation, anorexia, and abdominal distention." },
+                    { text: "Increased risk for blood clot formation (thrombus)", isCorrect: true, rationale: "Correct: Hypercalcemia enhances blood clotting, increasing thrombus risk in immobilized or slow-flowing vascular areas." },
+                    { text: "Positive Trousseau and Chvostek signs", isCorrect: false, rationale: "Incorrect: Positive Trousseau and Chvostek signs indicate hypocalcemia." },
+                    { text: "Hyperactive bowel sounds and diarrhea", isCorrect: false, rationale: "Incorrect: Hypocalcemia causes hyperactive bowel sounds; hypercalcemia causes hypoactive sounds/constipation." }
+                ],
+                hint: "Hypercalcemia 'calms down' excitable tissues, causing weakness, constipation, and clotting."
+            },
+            {
+                id: 38,
+                tag: "Magnesium Imbalance / Hypomagnesemia",
+                question: "The nurse is caring for a client with chronic alcoholism and acute hypomagnesemia. Which associated electrolyte imbalances commonly accompany low magnesium levels?",
+                type: "mc",
+                options: [
+                    { text: "Hypokalemia and hypocalcemia", isCorrect: true, rationale: "Correct: Magnesium levels are closely linked to potassium and calcium; hypomagnesemia frequently leads to refractory hypokalemia and hypocalcemia." },
+                    { text: "Hypernatremia and hyperchloremia", isCorrect: false, rationale: "Incorrect: Sodium and chloride are primarily regulated by ADH, aldosterone, and natriuretic peptides." },
+                    { text: "Hyperphosphatemia and hypermagnesemia", isCorrect: false, rationale: "Incorrect: The client has hypomagnesemia, not hypermagnesemia." },
+                    { text: "Metabolic alkalosis with elevated bicarbonate", isCorrect: false, rationale: "Incorrect: Acid-base imbalances can occur, but electrolyte co-deficiencies involve potassium and calcium." }
+                ],
+                hint: "Magnesium deficiency frequently drags down potassium and calcium levels with it."
+            },
+            {
+                id: 39,
+                tag: "Magnesium Imbalance / Hypermagnesemia",
+                question: "A client with chronic kidney disease has a serum magnesium level of 4.5 mEq/L. Which clinical assessment finding requires immediate nursing intervention?",
+                type: "mc",
+                options: [
+                    { text: "Severe bradycardia and hypotension", isCorrect: true, rationale: "Correct: Severe hypermagnesemia depresses cardiac conduction and vascular tone, causing profound bradycardia, hypotension, and risk of cardiac arrest." },
+                    { text: "Hyperactive deep tendon reflexes and muscle tetany", isCorrect: false, rationale: "Incorrect: Hypermagnesemia depresses neuromuscular activity, resulting in reduced or absent deep tendon reflexes." },
+                    { text: "Hyperactive bowel sounds and abdominal cramping", isCorrect: false, rationale: "Incorrect: Hypermagnesemia depresses smooth muscle and CNS function." },
+                    { text: "Agitation and tachycardia", isCorrect: false, rationale: "Incorrect: Hypermagnesemia causes drowsiness, lethargy, bradycardia, and CNS depression." }
+                ],
+                hint: "High magnesium depresses the heart and central nervous system."
+            },
+            {
+                id: 40,
+                tag: "Comprehensive Review / Lab Interpretation",
+                question: "A nurse reviews a client's lab results: Hematocrit 58% and serum sodium 150 mEq/L. How should the nurse interpret these findings?",
+                type: "mc",
+                options: [
+                    { text: "The client is experiencing hemoconcentration consistent with dehydration.", isCorrect: true, rationale: "Correct: Elevated hematocrit (hemoconcentration) and elevated sodium (hypernatremia) together indicate fluid volume deficit (dehydration)." },
+                    { text: "The client has acute fluid overload with hemodilution.", isCorrect: false, rationale: "Incorrect: Hemodilution causes decreased hematocrit and low sodium." },
+                    { text: "The client has primary iron-deficiency anemia.", isCorrect: false, rationale: "Incorrect: Elevated hematocrit indicates concentration of red blood cells, not anemia." },
+                    { text: "The client has normal physiologic lab values.", isCorrect: false, rationale: "Incorrect: Both values exceed normal physiological reference ranges." }
+                ],
+                hint: "Both hematocrit and sodium are elevated due to a loss of water volume."
+            },
+            {
+                id: 41,
+                tag: "Health Promotion / Patient Education",
+                question: "A nurse is teaching an adult client how to prevent fluid and electrolyte imbalances during hot weather. Which instruction is most appropriate?",
+                type: "mc",
+                options: [
+                    { text: "Increase fluid intake, particularly water, before heavy physical activity or prolonged sun exposure.", isCorrect: true, rationale: "Correct: Matching fluid intake with increased losses from perspiration prevents dehydration." },
+                    { text: "Consume caffeinated or alcoholic beverages to quench thirst effectively.", isCorrect: false, rationale: "Incorrect: Caffeine and alcohol increase fluid loss and should be avoided for hydration." },
+                    { text: "Restrict fluid intake if heavy sweating occurs to prevent hyponatremia.", isCorrect: false, rationale: "Incorrect: Restricting fluids during sweating precipitates severe dehydration." },
+                    { text: "Take daily over-the-counter loop diuretics to reduce swelling.", isCorrect: false, rationale: "Incorrect: Diuretics increase fluid and electrolyte loss and risk dehydration." }
+                ],
+                hint: "Water is the best fluid to prevent dehydration during physical activity."
+            },
+            {
+                id: 42,
+                tag: "Pharmacology / Diuretics",
+                question: "Which class of diuretic medications acts by inhibiting sodium and water reabsorption in the loop of Henle, frequently resulting in potassium loss?",
+                type: "mc",
+                options: [
+                    { text: "High-ceiling (loop) diuretics (e.g., furosemide)", isCorrect: true, rationale: "Correct: Loop diuretics inhibit sodium and water reabsorption in the loop of Henle, causing significant water and potassium excretion." },
+                    { text: "Potassium-sparing diuretics (e.g., spironolactone)", isCorrect: false, rationale: "Incorrect: Potassium-sparing diuretics block aldosterone receptors, retaining potassium." },
+                    { text: "Vasopressin receptor antagonists (e.g., tolvaptan)", isCorrect: false, rationale: "Incorrect: Tolvaptan promotes water excretion without losing sodium." },
+                    { text: "Calcium channel blockers", isCorrect: false, rationale: "Incorrect: Calcium channel blockers manage blood pressure by relaxing vascular smooth muscle, not diuresis." }
+                ],
+                hint: "Furosemide belongs to this potent diuretic category."
+            },
+            {
+                id: 43,
+                tag: "Assessment / Obligatory Urine Output",
+                question: "What is the minimum obligatory urine output per day required for an adult to excrete toxic metabolic waste products?",
+                type: "mc",
+                options: [
+                    { text: "400 to 600 mL", isCorrect: true, rationale: "Correct: Obligatory urine output is 400 to 600 mL per day; falling below this level causes toxic nitrogen buildup, lethal electrolyte imbalances, and acidosis." },
+                    { text: "100 to 200 mL", isCorrect: false, rationale: "Incorrect: 100-200 mL is severely oliguric and causes rapid toxin accumulation." },
+                    { text: "1500 to 2000 mL", isCorrect: false, rationale: "Incorrect: 1500-2000 mL is normal total urine output, not the minimum obligatory threshold." },
+                    { text: "3000 mL", isCorrect: false, rationale: "Incorrect: 3000 mL represents polyuria." }
+                ],
+                hint: "It is under 1 liter but above 300 mL."
+            },
+            {
+                id: 44,
+                tag: "Insensible Water Loss / Clinical Risk",
+                question: "Which clinical condition significantly increases insensible water loss?",
+                type: "mc",
+                options: [
+                    { text: "Fever and hyperventilation", isCorrect: true, rationale: "Correct: Insensible water loss through skin and lungs increases greatly with fever (500 mL per degree Celsius above normal) and rapid respirations/hyperventilation." },
+                    { text: "Hypothyroidism and hypothermia", isCorrect: false, rationale: "Incorrect: Low metabolic states decrease fluid loss." },
+                    { text: "Renal failure with oliguria", isCorrect: false, rationale: "Incorrect: Renal failure decreases urine output, but does not alter baseline respiratory/skin insensible loss directly." },
+                    { text: "Controlled mechanical ventilation with humidified air", isCorrect: false, rationale: "Incorrect: Unhumidified ventilation increases loss, but fever and hyperventilation are classic textbook triggers." }
+                ],
+                hint: "Think about conditions that elevate body temperature and respiratory rate."
+            },
+            {
+                id: 45,
+                tag: "Intravenous Therapy / Solutions",
+                question: "Which IV solution is classified as isotonic at the time of administration, having an osmolarity of approximately 308 mOsm/L?",
+                type: "mc",
+                options: [
+                    { text: "0.9% Sodium Chloride (Normal Saline)", isCorrect: true, rationale: "Correct: 0.9% saline is an isotonic crystalloid solution with an osmolarity of 308 mOsm/L." },
+                    { text: "0.45% Sodium Chloride (Half-Normal Saline)", isCorrect: false, rationale: "Incorrect: 0.45% saline has an osmolarity of 154 mOsm/L and is hypotonic." },
+                    { text: "3% Sodium Chloride", isCorrect: false, rationale: "Incorrect: 3% saline is hypertonic." },
+                    { text: "10% Dextrose in Water (D10W)", isCorrect: false, rationale: "Incorrect: D10W has an osmolarity of 500 mOsm/L and is hypertonic." }
+                ],
+                hint: "This is standard normal saline."
+            },
+            {
+                id: 46,
+                tag: "Intravenous Therapy / Hypotonic Solutions",
+                question: "When a hypotonic IV solution (e.g., 0.45% saline) is infused into a client, what fluid shift occurs?",
+                type: "mc",
+                options: [
+                    { text: "Water is pulled from the vascular space into interstitial and intracellular fluid compartments, expanding ICF and interstitial volumes while shrinking plasma volume.", isCorrect: true, rationale: "Correct: Hypotonic fluids have lower osmotic pressure than ECF, pulling water out of plasma into interstitial and intracellular spaces." },
+                    { text: "Water is pulled from cells into plasma, expanding plasma volume and shrinking cells.", isCorrect: false, rationale: "Incorrect: This describes hypertonic fluid shifts." },
+                    { text: "Solute particles diffuse rapidly across cell membranes without water movement.", isCorrect: false, rationale: "Incorrect: Osmosis governs water movement across semipermeable membranes." },
+                    { text: "No fluid movement occurs because tonicity matches plasma perfectly.", isCorrect: false, rationale: "Incorrect: Hypotonic solutions have lower osmolarity than plasma." }
+                ],
+                hint: "Hypotonic solutions cause water to move into cells and tissues."
+            },
+            {
+                id: 47,
+                tag: "Colloids vs Crystalloids",
+                question: "What is the primary characteristic of colloid IV solutions compared to crystalloids?",
+                type: "mc",
+                options: [
+                    { text: "Colloids contain larger non-water-soluble molecules that increase plasma osmotic pressure to expand plasma volume.", isCorrect: true, rationale: "Correct: Colloids contain large molecules that increase plasma colloid osmotic pressure to maintain or expand plasma volume with lower infused volumes." },
+                    { text: "Colloids consist only of pure water and glucose.", isCorrect: false, rationale: "Incorrect: Crystalloids contain water, minerals, and glucose." },
+                    { text: "Colloids disperse rapidly to all body fluid compartments.", isCorrect: false, rationale: "Incorrect: Crystalloids disperse to all compartments; colloids remain primarily in the vascular space." },
+                    { text: "Colloids are always the first-line resuscitation fluid for dehydration.", isCorrect: false, rationale: "Incorrect: Crystalloids are first-line; colloids are second-line options." }
+                ],
+                hint: "Colloids contain large molecules that stay in the blood vessels and pull fluid."
+            },
+            {
+                id: 48,
+                tag: "Gerontology / Calcium Loss",
+                question: "Which factor places postmenopausal females at highest risk for chronic calcium loss and osteoporosis?",
+                type: "mc",
+                options: [
+                    { text: "Reduction in estrogen levels and decrease in weight-bearing activities", isCorrect: true, rationale: "Correct: Diminished estrogen secretion and reduced weight-bearing activities accelerate bone calcium loss and osteoporosis in postmenopausal females." },
+                    { text: "Increased daily dietary calcium and vitamin D intake", isCorrect: false, rationale: "Incorrect: High calcium and vitamin D protect against bone loss." },
+                    { text: "Enhanced renal reabsorption of calcium", isCorrect: false, rationale: "Incorrect: Enhanced reabsorption would conserve calcium, not cause loss." },
+                    { text: "Hyperparathyroidism with excessive calcitonin secretion", isCorrect: false, rationale: "Incorrect: Calcitonin inhibits bone resorption and lowers calcium; estrogen deficiency is the primary postmenopausal risk factor." }
+                ],
+                hint: "Hormonal changes and lack of weight-bearing exercise weaken bones over time."
+            },
+            {
+                id: 49,
+                tag: "Hyponatremia / Causes",
+                question: "Which medication or clinical condition is a common cause of actual sodium deficit (hyponatremia)?",
+                type: "mc",
+                options: [
+                    { text: "Prolonged use of diuretic therapy and GI fluid loss (vomiting/diarrhea)", isCorrect: true, rationale: "Correct: Diuretic overuse and GI losses (vomiting, diarrhea, suction) cause actual sodium deficits by removing sodium from the body." },
+                    { text: "Excessive ingestion of hypotonic water in psychiatric polydipsia", isCorrect: false, rationale: "Incorrect: Polydipsia causes relative sodium deficit (dilution), not an actual loss of total body sodium." },
+                    { text: "Hyperaldosteronism", isCorrect: false, rationale: "Incorrect: Aldosterone retains sodium, leading to hypernatremia." },
+                    { text: "Cushing syndrome", isCorrect: false, rationale: "Incorrect: Cushing syndrome causes sodium excess." }
+                ],
+                hint: "Actual sodium loss occurs through diuretics or gastrointestinal fluid elimination."
+            },
+            {
+                id: 50,
+                tag: "Hypernatremia / Causes",
+                question: "Which condition is classified as a cause of relative sodium excess (dilution/dehydration)?",
+                type: "mc",
+                options: [
+                    { text: "Dehydration with water loss exceeding sodium loss", isCorrect: true, rationale: "Correct: Relative sodium excesses occur when water is lost faster than sodium, such as in dehydration, fever, hyperventilation, or diaphoresis." },
+                    { text: "Excessive oral ingestion of sodium chloride tablets", isCorrect: false, rationale: "Incorrect: Ingesting salt tablets causes an actual sodium excess." },
+                    { text: "Hyperaldosteronism", isCorrect: false, rationale: "Incorrect: Hyperaldosteronism causes actual sodium excess." },
+                    { text: "Administration of 3% hypertonic saline infusion", isCorrect: false, rationale: "Incorrect: Infusing concentrated sodium causes actual sodium excess." }
+                ],
+                hint: "Relative excess happens when water is lost from the body, concentrating existing sodium."
+            },
+            {
+                id: 51,
+                tag: "Hypokalemia / Causes",
+                question: "Which factor contributes to actual potassium deficit (hypokalemia)?",
+                type: "mc",
+                options: [
+                    { text: "Excessive gastrointestinal suctioning or wound drainage", isCorrect: true, rationale: "Correct: GI fluids (suction, vomiting, diarrhea, fistula drainage) contain potassium and lead to actual potassium deficits." },
+                    { text: "Acute metabolic acidosis", isCorrect: false, rationale: "Incorrect: Acidosis causes relative hyperkalemia as hydrogen ions shift into cells in exchange for potassium." },
+                    { text: "Renal failure with oliguria", isCorrect: false, rationale: "Incorrect: Kidney failure impairs potassium excretion, causing hyperkalemia." },
+                    { text: "Administration of potassium-sparing diuretics", isCorrect: false, rationale: "Incorrect: Potassium-sparing diuretics prevent potassium loss." }
+                ],
+                hint: "Loss of gastrointestinal fluids depletes body potassium stores."
+            },
+            {
+                id: 52,
+                tag: "Hyperkalemia / Interventions",
+                question: "A client is admitted with severe hyperkalemia and peaked T waves. Which intervention promotes the rapid movement of potassium from the extracellular fluid into the cells?",
+                type: "mc",
+                options: [
+                    { text: "Infusing intravenous regular insulin and glucose", isCorrect: true, rationale: "Correct: Insulin activates sodium-potassium pumps, driving potassium from the ECF into intracellular fluid, temporarily lowering serum potassium." },
+                    { text: "Administering oral potassium chloride supplements", isCorrect: false, rationale: "Incorrect: Oral potassium would worsen hyperkalemia." },
+                    { text: "Infusing 0.45% sodium chloride without additives", isCorrect: false, rationale: "Incorrect: Hypotonic saline does not shift potassium into cells." },
+                    { text: "Administering spironolactone", isCorrect: false, rationale: "Incorrect: Spironolactone is a potassium-sparing diuretic that retains potassium." }
+                ],
+                hint: "This hormone drives glucose and potassium into cells."
+            },
+            {
+                id: 53,
+                tag: "Hypocalcemia / Causes",
+                question: "Which surgical procedure places a client at high risk for acute hypocalcemia due to potential gland removal or destruction?",
+                type: "mc",
+                options: [
+                    { text: "Thyroidectomy or parathyroid surgery", isCorrect: true, rationale: "Correct: Removal or accidental damage to the parathyroid glands during thyroid or neck surgery halts PTH production, causing acute hypocalcemia." },
+                    { text: "Appendectomy", isCorrect: false, rationale: "Incorrect: Appendectomy does not affect calcium-regulating parathyroid glands." },
+                    { text: "Cholecystectomy", isCorrect: false, rationale: "Incorrect: Gallbladder removal does not impact parathyroid function." },
+                    { text: "Transurethral resection of the prostate (TURP)", isCorrect: false, rationale: "Incorrect: TURP does not alter calcium homeostasis." }
+                ],
+                hint: "These glands sit adjacent to the thyroid in the neck and regulate calcium."
+            },
+            {
+                id: 54,
+                tag: "Hypercalcemia / Interventions",
+                question: "A client is admitted with severe hypercalcemia. Which IV fluid is typically prescribed to promote renal calcium excretion?",
+                type: "mc",
+                options: [
+                    { text: "0.9% Sodium Chloride (Normal Saline)", isCorrect: true, rationale: "Correct: Normal saline is prescribed because sodium increases kidney excretion of calcium." },
+                    { text: "5% Dextrose in Water (D5W)", isCorrect: false, rationale: "Incorrect: D5W does not promote renal calcium excretion." },
+                    { text: "Ringer's lactate", isCorrect: false, rationale: "Incorrect: Ringer's lactate contains calcium and is contraindicated in hypercalcemia." },
+                    { text: "0.225% Sodium Chloride", isCorrect: false, rationale: "Incorrect: Low sodium hypotonic fluids do not promote calcium excretion like normal saline." }
+                ],
+                hint: "Sodium ions in normal saline help kidneys excrete calcium."
+            },
+            {
+                id: 55,
+                tag: "Magnesium / Assessment",
+                question: "When a client is receiving intravenous magnesium sulfate for severe hypomagnesemia, what is the priority nursing assessment?",
+                type: "mc",
+                options: [
+                    { text: "Monitoring deep tendon reflexes hourly", isCorrect: true, rationale: "Correct: Deep tendon reflexes must be assessed at least hourly during IV magnesium therapy to detect early hypermagnesemia and prevent cardiac/respiratory arrest." },
+                    { text: "Checking fasting blood glucose levels every 2 hours", isCorrect: false, rationale: "Incorrect: Glucose is monitored during insulin therapy, not magnesium." },
+                    { text: "Assessing skin turgor over the hand", isCorrect: false, rationale: "Incorrect: Skin turgor evaluates hydration, not magnesium toxicity." },
+                    { text: "Measuring abdominal girth every 4 hours", isCorrect: false, rationale: "Incorrect: Abdominal girth monitors ascites or distention, not magnesium safety." }
+                ],
+                hint: "Reflexes disappear as magnesium levels become too high."
+            },
+            {
+                id: 56,
+                tag: "Assessment / Orthostatic Hypotension",
+                question: "How should the nurse correctly measure a client's blood pressure to assess for orthostatic hypotension related to fluid volume deficit?",
+                type: "mc",
+                options: [
+                    { text: "Measure blood pressure with the client lying down, then sitting, and finally standing.", isCorrect: true, rationale: "Correct: Orthostatic BP is assessed sequentially in lying, sitting, and standing positions to detect significant drops in blood pressure and increases in pulse." },
+                    { text: "Measure blood pressure only in the standing position after vigorous exercise.", isCorrect: false, rationale: "Incorrect: Postural changes require sequential comparison from resting to upright." },
+                    { text: "Measure blood pressure with the client's arms raised above heart level.", isCorrect: false, rationale: "Incorrect: Raising arms alters vascular hydrostatic pressure incorrectly for orthostatic evaluation." },
+                    { text: "Measure blood pressure only while the client is sleeping.", isCorrect: false, rationale: "Incorrect: Sleep does not test postural blood pressure drops." }
+                ],
+                hint: "Compare blood pressure across three body positions: lying, sitting, and standing."
+            },
+            {
+                id: 57,
+                tag: "Fluid Overload / Nursing Interventions",
+                question: "What is the most reliable indicator of fluid retention and fluid overload in a hospitalized client?",
+                type: "mc",
+                options: [
+                    { text: "Rapid daily weight gain", isCorrect: true, rationale: "Correct: Rapid weight gain is the best indicator of fluid retention because metabolic tissue gain cannot exceed 0.5 lb per day; every pound gained above that equals 500 mL of fluid." },
+                    { text: "Client report of mild thirst", isCorrect: false, rationale: "Incorrect: Thirst indicates fluid deficit/dehydration." },
+                    { text: "Skin turgor over the hand", isCorrect: false, rationale: "Incorrect: Hand turgor is unreliable and assesses dehydration, not overload." },
+                    { text: "Clear, pale yellow urine output", isCorrect: false, rationale: "Incorrect: Urine color varies with intake; daily weight is the precise fluid monitor." }
+                ],
+                hint: "Weight doesn't lie: sudden gains reflect water weight."
+            },
+            {
+                id: 58,
+                tag: "Hyponatremia / Interventions",
+                question: "A client with severe symptomatic hyponatremia is prescribed a small-volume infusion of 3% hypertonic saline. What nursing precaution is essential during this infusion?",
+                type: "mc",
+                options: [
+                    { text: "Use an infusion controller/pump and monitor the infusion rate and client response closely.", isCorrect: true, rationale: "Correct: Hypertonic saline (3%) requires an infusion pump to prevent accidental rapid increases that can cause dangerous fluid shifts and brain injury." },
+                    { text: "Administer the solution rapidly via gravity tubing within 15 minutes.", isCorrect: false, rationale: "Incorrect: Rapid gravity infusion of 3% saline is dangerous and can precipitate acute pulmonary edema or osmotic demyelination." },
+                    { text: "Mix potassium chloride into the 3% saline bag.", isCorrect: false, rationale: "Incorrect: Potassium is added only to standard maintenance fluids under strict pharmacy protocol." },
+                    { text: "Discontinue all cardiac monitoring during infusion.", isCorrect: false, rationale: "Incorrect: Cardiac and neurological monitoring are vital." }
+                ],
+                hint: "Concentrated sodium solutions must be strictly controlled via pump to avoid rapid shifts."
+            },
+            {
+                id: 59,
+                tag: "Hypernatremia / Nursing Care",
+                question: "When caring for an older adult client with hypernatremia and dehydration, which IV fluid is most frequently prescribed for initial rehydration?",
+                type: "mc",
+                options: [
+                    { text: "Isotonic saline (0.9%) or dextrose 5% in 0.45% sodium chloride", isCorrect: true, rationale: "Correct: 0.9% saline or D5W/0.45% NaCl (which metabolizes to hypotonic) are prescribed to restore fluid balance and gradually lower serum sodium." },
+                    { text: "3% Sodium Chloride", isCorrect: false, rationale: "Incorrect: 3% saline increases sodium further and is used for hyponatremia." },
+                    { text: "10% Dextrose in Water (D10W)", isCorrect: false, rationale: "Incorrect: D10W is hypertonic and used for specific caloric/osmotic needs." },
+                    { text: "Saturated potassium chloride solution", isCorrect: false, rationale: "Incorrect: Potassium does not treat hypernatremia." }
+                ],
+                hint: "Isotonic or hypotonic-after-metabolism solutions help correct hypernatremia safely."
+            },
+            {
+                id: 60,
+                tag: "Hypokalemia / Assessment",
+                question: "A client with hypokalemia reports severe constipation, abdominal distention, and hypoactive bowel sounds. What pathophysiological mechanism explains these findings?",
+                type: "mc",
+                options: [
+                    { text: "Decreased gastrointestinal smooth muscle contractions and reduced peristalsis", isCorrect: true, rationale: "Correct: Hypokalemia reduces smooth muscle excitability throughout the GI tract, leading to decreased peristalsis, hypoactive bowel sounds, and paralytic ileus." },
+                    { text: "Hyperactive intestinal muscle contractions causing rapid diarrhea", isCorrect: false, rationale: "Incorrect: Hyperkalemia and hyponatremia cause increased GI motility/diarrhea; hypokalemia causes decreased motility/constipation." },
+                    { text: "Immediate destruction of gastric mucosa", isCorrect: false, rationale: "Incorrect: Potassium deficiency affects muscle excitability, not direct mucosal destruction." },
+                    { text: "Biliary duct obstruction", isCorrect: false, rationale: "Incorrect: Biliary obstruction is unrelated to potassium balance." }
+                ],
+                hint: "Low potassium slows down smooth muscle activity in the gut."
+            },
+            {
+                id: 61,
+                tag: "Hyperkalemia / Patient Education",
+                question: "Which dietary and lifestyle instruction should the nurse provide to a client at risk for hyperkalemia?",
+                type: "mc",
+                options: [
+                    { text: "Avoid salt substitutes, as they often contain high amounts of potassium chloride.", isCorrect: true, rationale: "Correct: Salt substitutes replace sodium with potassium chloride; clients with hyperkalemia must avoid them to prevent dangerous potassium elevations." },
+                    { text: "Increase consumption of citrus fruits, bananas, and meat.", isCorrect: false, rationale: "Incorrect: These foods are high in potassium and should be restricted in hyperkalemia." },
+                    { text: "Use potassium-based seasoning liberally on all foods.", isCorrect: false, rationale: "Incorrect: This would raise potassium levels dangerously." },
+                    { text: "Take over-the-counter potassium supplements daily.", isCorrect: false, rationale: "Incorrect: Supplements are contraindicated in hyperkalemia." }
+                ],
+                hint: "Warn clients to check labels on salt substitutes."
+            },
+            {
+                id: 62,
+                tag: "Hypocalcemia / Assessment",
+                question: "The nurse assesses a client for Chvostek sign. How is this test performed?",
+                type: "mc",
+                options: [
+                    { text: "Tap the facial nerve just below and in front of the ear to observe for facial twitching.", isCorrect: true, rationale: "Correct: Chvostek sign is elicited by tapping the facial nerve in front of the ear; a positive response causes twitching of the mouth, nose, and cheek." },
+                    { text: "Inflate a blood pressure cuff on the upper arm for 3 minutes.", isCorrect: false, rationale: "Incorrect: This is the Trousseau sign." },
+                    { text: "Lightly strike the patellar tendon with a reflex hammer.", isCorrect: false, rationale: "Incorrect: This tests knee-jerk deep tendon reflexes." },
+                    { text: "Palpate bilateral calf muscles for tenderness.", isCorrect: false, rationale: "Incorrect: This assesses muscle cramping, not Chvostek sign." }
+                ],
+                hint: "Tap on the facial cheek area near the ear."
+            },
+            {
+                id: 63,
+                tag: "Hypercalcemia / Assessment",
+                question: "Which cardiac ECG change is characteristic of hypercalcemia?",
+                type: "mc",
+                options: [
+                    { text: "Shortened QT interval", isCorrect: true, rationale: "Correct: Hypercalcemia shortens the QT interval and depresses electrical conduction." },
+                    { text: "Prolonged QT interval and U waves", isCorrect: false, rationale: "Incorrect: Prolonged QT intervals occur in hypocalcemia; U waves indicate hypokalemia." },
+                    { text: "Tall, peaked T waves", isCorrect: false, rationale: "Incorrect: Tall T waves indicate hyperkalemia." },
+                    { text: "ST-segment depression", isCorrect: false, rationale: "Incorrect: ST depression indicates hypokalemia." }
+                ],
+                hint: "High calcium shrinks the QT interval on the cardiac monitor."
+            },
+            {
+                id: 64,
+                tag: "Magnesium / Hypomagnesemia",
+                question: "Which client is at highest risk for developing hypomagnesemia?",
+                type: "mc",
+                options: [
+                    { text: "A client with chronic alcohol use disorder and malnutrition", isCorrect: true, rationale: "Correct: Chronic alcoholism, malnutrition, and starvation are major causes of hypomagnesemia due to poor intake and increased renal excretion." },
+                    { text: "A client with end-stage kidney failure", isCorrect: false, rationale: "Incorrect: Kidney failure causes hypermagnesemia due to decreased excretion." },
+                    { text: "A client taking potassium-sparing diuretics", isCorrect: false, rationale: "Incorrect: Potassium-sparing diuretics retain potassium and magnesium." },
+                    { text: "A client receiving long-term calcium-based antacids", isCorrect: false, rationale: "Incorrect: Antacids containing magnesium cause hypermagnesemia." }
+                ],
+                hint: "Alcoholism and poor nutrition deplete magnesium stores."
+            },
+            {
+                id: 65,
+                tag: "Magnesium / Hypermagnesemia",
+                question: "What is the primary mechanism causing neuromuscular and CNS depression in hypermagnesemia?",
+                type: "mc",
+                options: [
+                    { text: "Suppression of nerve impulse transmission and neuromuscular blockade", isCorrect: true, rationale: "Correct: Elevated magnesium suppresses nerve transmission and neuromuscular synapses, causing lethargy, drowsiness, and absent reflexes." },
+                    { text: "Over-excitation of sodium-potassium membrane pumps", isCorrect: false, rationale: "Incorrect: Magnesium excess depresses rather than over-excites membrane activity." },
+                    { text: "Increased parathyroid hormone secretion", isCorrect: false, rationale: "Incorrect: PTH regulates calcium." },
+                    { text: "Massive release of intracellular potassium into ECF", isCorrect: false, rationale: "Incorrect: Hyperkalemia is a separate electrolyte disturbance." }
+                ],
+                hint: "Magnesium acts as a natural sedative on nerves and muscles when levels are high."
+            },
+            {
+                id: 66,
+                tag: "Interprofessional Care / Nutrition",
+                question: "A nurse is collaborating with a registered dietitian nutritionist (RDN) to plan dietary teaching for a client with chronic fluid overload and hypertension. Which dietary modification is essential?",
+                type: "mc",
+                options: [
+                    { text: "Sodium restriction (no added salt or low-sodium diet)", isCorrect: true, rationale: "Correct: Sodium restriction prevents water retention because sodium holds water in the ECF, worsening hypertension and fluid overload." },
+                    { text: "High sodium intake to stimulate thirst", isCorrect: false, rationale: "Incorrect: High sodium increases fluid retention." },
+                    { text: "Elimination of all dietary potassium and calcium", isCorrect: false, rationale: "Incorrect: Potassium and calcium are essential electrolytes; sodium and fluid are restricted." },
+                    { text: "Restriction of pure water intake to 200 mL daily", isCorrect: false, rationale: "Incorrect: Fluid restriction is tailored, but sodium restriction is the primary dietary pillar." }
+                ],
+                hint: "Where sodium goes, water follows; reducing salt helps control fluid overload."
+            },
+            {
+                id: 67,
+                tag: "Assessment / Jugular Vein Distention",
+                question: "How should the nurse correctly assess neck veins for distention in a client being evaluated for fluid status?",
+                type: "mc",
+                options: [
+                    { text: "Observe neck veins with the client supine and when elevated to a sitting position.", isCorrect: true, rationale: "Correct: Neck veins are normally distended when supine and flatten when sitting up; persistent distention in upright positions indicates fluid overload." },
+                    { text: "Inspect neck veins only while the client is standing upright.", isCorrect: false, rationale: "Incorrect: Supine comparison is necessary to evaluate baseline filling." },
+                    { text: "Palpate the carotid arteries vigorously to assess vein pressure.", isCorrect: false, rationale: "Incorrect: Carotid palpation checks arterial pulse, not jugular venous pressure." },
+                    { text: "Inspect neck veins only during active coughing.", isCorrect: false, rationale: "Incorrect: Coughing alters intrathoracic pressure transiently." }
+                ],
+                hint: "Compare neck vein flatness when sitting versus flatness when lying down."
+            },
+            {
+                id: 68,
+                tag: "Gerontology / Safety Precautions",
+                question: "An 82-year-old client with dehydration experiences orthostatic hypotension and lightheadedness upon standing. What is the priority nursing intervention?",
+                type: "mc",
+                options: [
+                    { text: "Instruct the client to get up slowly from lying/sitting positions and ask for assistance before ambulating.", isCorrect: true, rationale: "Correct: Orthostatic hypotension increases fall risks; teaching slow position changes and requiring assistance prevents falls and injury." },
+                    { text: "Encourage independent ambulation to restore muscle strength quickly.", isCorrect: false, rationale: "Incorrect: Independent ambulation with dizziness leads to falls." },
+                    { text: "Administer a rapid IV potassium bolus.", isCorrect: false, rationale: "Incorrect: Potassium does not treat orthostatic hypotension." },
+                    { text: "Restrain the client in bed at all times.", isCorrect: false, rationale: "Incorrect: Restraints are inappropriate; fall precautions and assistance are indicated." }
+                ],
+                hint: "Prevent falls by advising slow position changes and requesting assistance."
+            },
+            {
+                id: 69,
+                tag: "Pharmacology / Demeclocycline & Lithium",
+                question: "A client with syndrome of inappropriate antidiuretic hormone secretion (SIADH) and severe hyponatremia is prescribed demeclocycline. What is the therapeutic rationale?",
+                type: "mc",
+                options: [
+                    { text: "It counteracts ADH action on kidney nephrons, promoting water excretion.", isCorrect: true, rationale: "Correct: Demeclocycline and lithium inhibit ADH renal action, promoting water excretion and correcting dilutional hyponatremia." },
+                    { text: "It actively binds sodium in the GI tract to prevent excretion.", isCorrect: false, rationale: "Incorrect: Patiromer binds potassium in the gut, not sodium." },
+                    { text: "It stimulates aldosterone synthesis in the adrenal cortex.", isCorrect: false, rationale: "Incorrect: Demeclocycline is an antibiotic that blocks ADH effects." },
+                    { text: "It causes rapid potassium excretion.", isCorrect: false, rationale: "Incorrect: Its primary role here is managing ADH-mediated water retention." }
+                ],
+                hint: "This medication opposes antidiuretic hormone in the kidneys."
+            },
+            {
+                id: 70,
+                tag: "Electrolytes / Calcium & Phosphorus",
+                question: "The nurse understands that serum calcium levels and phosphorus levels typically exhibit which relationship in human body fluids?",
+                type: "mc-basic",
+                options: [
+                    { text: "Reciprocal relationship (when calcium levels are high, phosphorus levels are generally low, and vice versa).", isCorrect: true, rationale: "Correct: Calcium and phosphorus share an inverse (reciprocal) relationship in plasma regulation." },
+                    { text: "Direct parallel relationship (they always rise and fall together equally).", isCorrect: false, rationale: "Incorrect: They do not move in the same direction; one rises as the other falls." },
+                    { text: "Independent relationship with zero physiological interaction.", isCorrect: false, rationale: "Incorrect: They interact closely via PTH and bone metabolism." },
+                    { text: "Constant identical molar ratio in all compartments.", isCorrect: false, rationale: "Incorrect: Their serum levels vary inversely." }
+                ],
+                hint: "Think of a seesaw: when one goes up, the other goes down."
+            },
+            {
+                id: 71,
+                tag: "Intravenous Therapy / Infiltration",
+                question: "An IV infusion containing potassium chloride is infusing into a client's forearm. The nurse notes swelling, coolness, and pain around the insertion site. What is the immediate priority nursing action?",
+                type: "mc",
+                options: [
+                    { text: "Stop the IV infusion immediately, remove the venous access, and notify the health care provider.", isCorrect: true, rationale: "Correct: Potassium is a severe tissue irritant causing necrosis; infiltration requires immediate cessation, catheter removal, provider notification, and site documentation/photography." },
+                    { text: "Apply warm compresses and continue infusing at a slower rate.", isCorrect: false, rationale: "Incorrect: Continuing an infiltrated potassium infusion causes severe tissue necrosis." },
+                    { text: "Flush the IV line with normal saline to clear the obstruction.", isCorrect: false, rationale: "Incorrect: Flushing forces more irritant solution into the tissue." },
+                    { text: "Elevate the arm and reassess in 30 minutes.", isCorrect: false, rationale: "Incorrect: Immediate removal is required to prevent tissue damage." }
+                ],
+                hint: "Stop the infusion right away because potassium causes tissue necrosis."
+            },
+            {
+                id: 72,
+                tag: "Critical Thinking / Fluid Shift",
+                question: "A client experiences acute burn trauma affecting 40% of total body surface area. Which fluid and electrolyte shift occurs immediately post-burn?",
+                type: "mc",
+                options: [
+                    { text: "Plasma fluid shifts rapidly into the interstitial space (third spacing), causing hypovolemia.", isCorrect: true, rationale: "Correct: Severe burns increase capillary permeability, causing massive plasma fluid and protein shifts into interstitial spaces (third spacing), resulting in hypovolemic shock." },
+                    { text: "Interstitial fluid shifts into cells, causing massive cellular swelling.", isCorrect: false, rationale: "Incorrect: Burn shock involves vascular fluid loss into interstitial spaces." },
+                    { text: "Intracellular potassium shifts into plasma, causing immediate hypokalemia.", isCorrect: false, rationale: "Incorrect: Cell destruction and tissue trauma release intracellular potassium into the ECF, causing hyperkalemia." },
+                    { text: "Renal excretion increases by 500% to eliminate toxins.", isCorrect: false, rationale: "Incorrect: Oliguria occurs due to reduced perfusion." }
+                ],
+                hint: "Burns cause fluid to leak out of blood vessels into surrounding tissues."
+            },
+            {
+                id: 73,
+                tag: "Evaluation / Successful Outcomes",
+                question: "The nurse is evaluating outcomes for a client successfully treated for dehydration. Which finding indicates effective treatment and restored fluid balance?",
+                type: "mc",
+                options: [
+                    { text: "Maintains a daily fluid intake of at least 1500 mL and stable blood pressure", isCorrect: true, rationale: "Correct: Maintaining adequate daily fluid intake, stable normal blood pressure, moist mucous membranes, and normal skin turgor indicate successful rehydration." },
+                    { text: "Persistent orthostatic hypotension and dry mucous membranes", isCorrect: false, rationale: "Incorrect: These indicate ongoing dehydration." },
+                    { text: "Urine specific gravity greater than 1.030 with dark amber urine", isCorrect: false, rationale: "Incorrect: Concentrated dark urine reflects ongoing fluid deficit." },
+                    { text: "Continued 2-pound weight loss daily", isCorrect: false, rationale: "Incorrect: Continued weight loss indicates ongoing fluid loss." }
+                ],
+                hint: "Look for normal vital signs, adequate fluid intake, and moist mucous membranes."
+            },
+            {
+                id: 74,
+                tag: "Electrolytes / Acid-Base Interaction",
+                question: "How does acute metabolic acidosis typically affect serum potassium levels?",
+                type: "mc",
+                options: [
+                    { text: "Causes relative hyperkalemia as excess hydrogen ions move into cells in exchange for potassium ions.", isCorrect: true, rationale: "Correct: In acidosis, excess hydrogen ions move into cells; to maintain electrical neutrality, potassium ions shift out of cells into the ECF, causing relative hyperkalemia." },
+                    { text: "Causes severe hypokalemia as potassium ions shift into cells.", isCorrect: false, rationale: "Incorrect: Alkalosis causes potassium to shift into cells (hypokalemia); acidosis shifts potassium out of cells." },
+                    { text: "Has no effect on potassium distribution.", isCorrect: false, rationale: "Incorrect: Acid-base balance strongly influences potassium distribution." },
+                    { text: "Directly destroys all body potassium stores via renal excretion.", isCorrect: false, rationale: "Incorrect: The shift is cellular, not total destruction." }
+                ],
+                hint: "Acidosis pushes hydrogen in and forces potassium out into the blood."
+            },
+            {
+                id: 75,
+                tag: "Comprehensive Review / Endocrine Imbalances",
+                question: "A client with Addison disease (adrenal insufficiency) is at risk for which fluid and electrolyte disturbances?",
+                type: "mc",
+                options: [
+                    { text: "Hyponatremia, hyperkalemia, and hypovolemia", isCorrect: true, rationale: "Correct: Adrenal insufficiency means a lack of aldosterone; without aldosterone, the body loses sodium and water (hyponatremia, hypovolemia) and retains potassium (hyperkalemia)." },
+                    { text: "Hypernatremia, hypokalemia, and hypervolemia", isCorrect: false, rationale: "Incorrect: This pattern occurs in hyperaldosteronism (Cushing syndrome)." },
+                    { text: "Hypercalcemia and hypermagnesemia", isCorrect: false, rationale: "Incorrect: Adrenal insufficiency primarily impairs sodium, potassium, and water regulation." },
+                    { text: "Normal fluid and electrolyte balance with no risk of disturbance", isCorrect: false, rationale: "Incorrect: Adrenal disease disrupts key fluid-regulating hormones." }
+                ],
+                hint: "Without aldosterone, sodium and water are lost while potassium is retained."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let incorrectQuestionIndices = [];
+        let isRetakeMissed = false;
+        let activeQuestions = [...questionsData];
+
+        function startQuiz() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            isRetakeMissed = false;
+            activeQuestions = [...questionsData];
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = new Array(activeQuestions.length).fill(null);
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = activeQuestions[currentQuestionIndex];
+            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} of ${activeQuestions.length}`;
+            document.getElementById('score-tracker').innerText = `Score: ${score}`;
+            document.getElementById('tag-container').innerHTML = `<span class="tag-badge">${q.tag}</span>`;
+            document.getElementById('question-text').innerText = q.question;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.className = 'option-item';
+                
+                const input = document.createElement('input');
+                input.type = q.type === 'sata' ? 'checkbox' : 'radio';
+                input.name = 'quiz-option';
+                input.value = idx;
+                input.id = `opt-${idx}`;
+
+                const label = document.createElement('label');
+                label.htmlFor = `opt-${idx}`;
+                label.innerText = opt.text;
+
+                li.appendChild(input);
+                li.appendChild(label);
+                optionsContainer.appendChild(li);
+            });
+
+            document.getElementById('rationales-container').style.display = 'none';
+            document.getElementById('submit-btn').classList.remove('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+        }
+
+        function submitAnswer() {
+            const q = activeQuestions[currentQuestionIndex];
+            const inputs = document.querySelectorAll('input[name="quiz-option"]');
+            let selectedIndices = [];
+
+            inputs.forEach((input, idx) => {
+                if (input.checked) {
+                    selectedIndices.push(idx);
+                }
+            });
+
+            if (selectedIndices.length === 0) {
+                alert('Please select at least one answer option.');
+                return;
+            }
+
+            userAnswers[currentQuestionIndex] = selectedIndices;
+
+            // Evaluate correctness
+            let isCorrect = true;
+            q.options.forEach((opt, idx) => {
+                const isSelected = selectedIndices.includes(idx);
+                if (opt.isCorrect !== isSelected) {
+                    isCorrect = false;
+                }
+            });
+
+            if (isCorrect) {
+                score++;
+            }
+
+            // Display rationales
+            let rationalesHTML = '';
+            q.options.forEach((opt, idx) => {
+                const cls = opt.isCorrect ? 'rationale-correct' : 'rationale-incorrect';
+                const prefix = opt.isCorrect ? '[Correct Option]: ' : '[Incorrect Option]: ';
+                rationalesHTML += `<p><strong class="${cls}">${prefix} ${opt.text}</strong><br>${opt.rationale}</p>`;
+            });
+
+            document.getElementById('rationales-content').innerHTML = rationalesHTML;
+            document.getElementById('rationales-container').style.display = 'block';
+            document.getElementById('submit-btn').classList.add('hidden');
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < activeQuestions.length) {
+                loadQuestion();
+            } else {
+                // Transition to SBAR Case Study
+                document.getElementById('quiz-screen').classList.add('hidden');
+                document.getElementById('sbar-screen').classList.remove('hidden');
+            }
+        }
+
+        function finishExam() {
+            document.getElementById('sbar-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            document.getElementById('final-score').innerText = `${score} / ${questionsData.length}`;
+            
+            const percentage = (score / questionsData.length) * 100;
+            let msg = '';
+            if (percentage >= 80) {
+                msg = 'Outstanding performance! You have demonstrated exceptional mastery of Chapter 13 Fluid and Electrolyte concepts.';
+            } else if (percentage >= 70) {
+                msg = 'Good job! You passed with a solid understanding, but review rationales on missed concepts.';
+            } else {
+                msg = 'Keep studying! Review Chapter 13 learning objectives, fluid shifts, and electrolyte imbalances thoroughly.';
+            }
+            document.getElementById('score-message').innerText = msg;
+
+            // Track missed questions for retake
+            incorrectQuestionIndices = [];
+            userAnswers.forEach((ans, idx) => {
+                // simple evaluation check
+                const q = questionsData[idx];
+                let isCorrect = true;
+                q.options.forEach((opt, oIdx) => {
+                    const selected = ans && ans.includes(oIdx);
+                    if (opt.isCorrect !== selected) isCorrect = false;
+                });
+                if (!isCorrect) {
+                    incorrectQuestionIndices.push(idx);
+                }
+            });
+
+            if (incorrectQuestionIndices.length === 0) {
+                document.getElementById('retake-missed-btn').classList.add('hidden');
+            } else {
+                document.getElementById('retake-missed-btn').classList.remove('hidden');
+            }
+        }
+
+        function restartQuiz() {
+            document.getElementById('results-screen').classList.add('hidden');
+            startQuiz();
+        }
+
+        function retakeMissed() {
+            if (incorrectQuestionIndices.length === 0) return;
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            
+            activeQuestions = incorrectQuestionIndices.map(idx => questionsData[idx]);
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = new Array(activeQuestions.length).fill(null);
+            isRetakeMissed = true;
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>
+```eof
+
+### Summary of the Generated Quiz
+We have successfully generated a comprehensive interactive HTML quiz file (`nclex_fluid_electrolyte_quiz.html`) containing 75 NCLEX-style questions (incorporating both multiple-choice and select-all-that-apply items) built strictly around the learning outcomes, pathophysiology, assessment findings, and interventions from Chapter 13. Each question is tagged to its core learning concept and features detailed rationales for every option. Furthermore, the quiz concludes with an interactive clinical SBAR case study report form and provides complete scoring with options to retake the full exam or practice missed questions.
+
+**Word of Encouragement:** You've got this! Fluid and electrolyte balance can be challenging with all the interconnected hormonal and physiological shifts, but working through these 75 questions will cement your clinical judgment for the NCLEX. Take your time, read every rationale, and trust your clinical reasoning!
